@@ -1,0 +1,9 @@
+whisper >=0.9.10,<0.10.0
+carbon >=0.9.10,<0.10.0
+graphite-web >=0.9.10,<0.10.0
+django >=1.3.7,<1.4
+gunicorn >=0.17.4,<0.18.0
+django-tagging >=0.3.1,<0.4.0
+python-memcached >= 1.53
+twisted >= 13.2.0, <13.4.0
+Python-fontconfig >= 0.5.1, <0.6.0
