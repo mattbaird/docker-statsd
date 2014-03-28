@@ -49,7 +49,7 @@ RUN chown -R www-data.www-data /opt/graphite/storage/whisper
 ###
 #RUN [ -f /opt/graphite/storage/storage/whisper/graphite.db ] && chmod 0664 /opt/graphite/storage/storage/whisper/graphite.db
 
-RUN python /opt/graphite/webapp/graphite/manage.py syncdb
+RUN python /opt/graphite/webapp/graphite/manage.py syncdb --noinput
 
 ADD supervisord.conf /etc/supervisor/conf.d/
 
