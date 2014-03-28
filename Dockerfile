@@ -32,7 +32,7 @@ ADD config.js /opt/statsd/
 
 RUN mkdir -p /opt/graphite/storage/whisper
 RUN chown -R www-data.www-data /opt/graphite/storage/whisper
-RUN chmod 0664/opt/graphite/storage/storage/whisper/graphite.db
+RUN chmod 0664 /opt/graphite/storage/storage/whisper/graphite.db
 
 RUN python /opt/graphite/webapp/graphite/manage.py syncdb
 
