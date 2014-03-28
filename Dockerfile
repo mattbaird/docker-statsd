@@ -17,6 +17,16 @@ ADD initial_data.json /opt/graphite/webapp/graphite/initial_data.json
 ADD dependencies.txt /opt/graphite/
 RUN pip install -r /opt/graphite/dependencies.txt
 
+###
+# Due to an issue with older versions of django, we need to install a specific
+# version of the django-tagging package (0.3.1) or later.
+# It also sounds like >=django-1.5 may fix this as well.
+# REF(1): https://github.com/gdbtek/setup-graphite/pull/4
+###
+#RUN pip uninstall django-tagging
+RUN pip uninstall -y django-tagging
+RUN pip install django-tagging==0.3.1
+
 ADD storage-schemas.conf /opt/graphite/conf/
 ADD carbon.conf /opt/graphite/conf/
 
@@ -32,7 +42,12 @@ ADD config.js /opt/statsd/
 
 RUN mkdir -p /opt/graphite/storage/whisper
 RUN chown -R www-data.www-data /opt/graphite/storage/whisper
-RUN chmod 0664 /opt/graphite/storage/storage/whisper/graphite.db
+
+###
+# @TODO This line is commented out because it errors when being run since
+# graphite.db did not yet exist
+###
+#RUN [ -f /opt/graphite/storage/storage/whisper/graphite.db ] && chmod 0664 /opt/graphite/storage/storage/whisper/graphite.db
 
 RUN python /opt/graphite/webapp/graphite/manage.py syncdb
 
